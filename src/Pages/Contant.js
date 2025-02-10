@@ -44,7 +44,7 @@ const Contant = ({userName,points,setPoints,userEmail,userAccess,wins,setWins}) 
                     Create Quiz
                     </Button>
                 </Link>
-                <Button disabled variant="primary" className="me-2 p-4 p-md-5 d-flex flex-column justify-content-sm-start justify-content-md-center fw-bold" style={{cursor : "not-allowed"}}>
+                <Button disabled variant="primary" className="d-none me-2 p-4 p-md-5 d-flex flex-column justify-content-sm-start justify-content-md-center fw-bold" style={{cursor : "not-allowed"}}>
                    <GrAchievement className="fs-1 ms-auto me-auto"/>
                    Achievements
                 </Button>
