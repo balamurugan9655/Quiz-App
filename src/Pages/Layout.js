@@ -22,8 +22,10 @@ const Layout = ({userName, userEmail, userAccess}) => {
     // console.log(userData.name)
       
 
-    const [points , setPoints] = useState(1000);
-    const [wins , setWins] = useState(10)
+    const [points , setPoints] = useState(100);
+    const [wins , setWins] = useState(
+        Math.floor(Math.random()*100)
+    )
     
     return(
         <>

@@ -39,7 +39,7 @@ const Contant = ({userName,points,setPoints,userEmail,userAccess,wins,setWins}) 
                     </Button>
                 </Link>
                 <Link to={userAccess === "Student" ? "#" : "/createQuiz"} state={{userName,points}} className="text-decoration-none" style={userAccess === "Student" ? {cursor : "not-allowed"} : {cursor : "pointer"}  }>
-                    <Button variant="primary" disabled={userAccess === "Student"} className="me-2 p-4 p-md-5 d-flex flex-column justify-content-sm-start justify-content-md-center fw-bold"  state={{userName,points}}>
+                    <Button variant="primary" disabled={userAccess === "Student"} className="me-2 p-4 p-md-5 d-flex flex-column justify-content-sm-start justify-content-md-center fw-bold" state={{userName,points}}>
                     <IoCreateSharp className="fs-1 ms-auto me-auto"/>
                     Create Quiz
                     </Button>
