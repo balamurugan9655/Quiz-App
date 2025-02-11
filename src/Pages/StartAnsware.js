@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import { PointsContext } from "./Contant";
 
-const StartAnswer = () => {
+const StartAnswer = ({points,setPoints}) => {
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [score, setScore] = useState(0);
+
+    // const {points, setPoints} = useContext(PointsContext);
 
     const API_URL = 'https://json-server-api-2owl.onrender.com/questions';
 
@@ -42,6 +45,7 @@ const StartAnswer = () => {
             }
         });
         setScore(calculatedScore);
+        // setPoints(points+(score*10));
         setIsSubmitted(true);
     };
 
@@ -59,7 +63,7 @@ const StartAnswer = () => {
                 questions.length > 0 && currentQuestionIndex < questions.length ? (
                     <div>
                         {/* Display Current Question */}
-                        <h4 className="p-2">Q{questions[currentQuestionIndex].id}. {questions[currentQuestionIndex].text}</h4>
+                        <h4 className="p-2" style={{ whiteSpace: "pre-wrap" }}>Q{questions[currentQuestionIndex].id}. {questions[currentQuestionIndex].text}</h4>
 
                         {/* Display Options */}
                         {questions[currentQuestionIndex].options.map((option, index) => (

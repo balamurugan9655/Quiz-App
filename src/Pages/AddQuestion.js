@@ -75,6 +75,8 @@ const AddQuestion = () => {
             if (!response.ok) throw new Error("Failed to delete question");
 
             setQuestions(questions.filter(q => q.id !== id));
+
+            alert("Question Delected Successfully!");
         } catch (error) {
             console.error("Error deleting question:", error);
         }
@@ -89,7 +91,7 @@ const AddQuestion = () => {
                     <Form.Control
                         as="textarea"
                         placeholder="Enter Question"
-                        style={{ height: '100px' }}
+                        style={{ height: '100px' , whiteSpace: 'pre-wrap' }}
                         value={newQuestion}
                         onChange={(e) => setNewQuestion(e.target.value)}
                     />
@@ -131,7 +133,7 @@ const AddQuestion = () => {
                 {questions.map((q) => (
                     <ListGroup.Item key={q.id}>
                         <div className="d-flex justify-content-between align-items-center">
-                            <strong>{q.id}. {q.text}</strong>
+                            <strong style={{ whiteSpace: "pre-wrap" }}>{q.id}. {q.text}</strong>
                             <Button variant="danger" size="sm" onClick={() => deleteQuestion(q.id)}>
                                 Delete
                             </Button>
