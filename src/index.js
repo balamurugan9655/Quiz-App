@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes , Route } from 'react-router-dom';
+import { HashRouter, Routes , Route } from 'react-router-dom';
 // import Example from './Pages/Example';
 import CreateQuiz from './Pages/CreateQuiz';
 import StartQuiz from './Pages/StartQuiz';
@@ -11,11 +11,11 @@ import Layout from './Pages/Layout';
 import Header from './Pages/Header';
 import Contant from './Pages/Contant';
 
-// basename="/Quiz-App"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<App/>}/>
         <Route path="/layout" element={<Layout/>}/>
@@ -24,7 +24,7 @@ root.render(
         <Route path="/createQuiz" element={<CreateQuiz/>}/>
         <Route path="/startQuiz" element={<StartQuiz/>}/>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
 
