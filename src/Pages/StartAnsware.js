@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { PointsContext } from "./Contant";
 
-const StartAnswer = ({points,setPoints}) => {
+const StartAnswer = ({ points, setPoints }) => {
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [score, setScore] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const defaultLoading = "Fetching Questions... Please wait.";
 
-    // const {points, setPoints} = useContext(PointsContext);
-
-    const API_URL = 'https://json-server-api-2owl.onrender.com/questions';
-
-    // Fetch Questions from API
+    
+    // Fetch Questions with Caching & Preloading
     useEffect(() => {
+        const API_URL = "https://json-server-api-2owl.onrender.com/questions";
         const fetchQuestions = async () => {
+            
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
+                data.sort((a, b) => a.id - b.id); // Sort questions by ID
                 setQuestions(data);
+                localStorage.setItem("questions", JSON.stringify(data));
             } catch (error) {
                 console.error("Error fetching questions:", error);
             }
+            setLoading(false);
         };
         fetchQuestions();
+
+        const cachedData = localStorage.getItem("questions");
+            if (cachedData) {
+                setQuestions(JSON.parse(cachedData));
+                setLoading(false);
+                return;
+            }
     }, []);
 
     // Handle Answer Selection
@@ -45,7 +55,6 @@ const StartAnswer = ({points,setPoints}) => {
             }
         });
         setScore(calculatedScore);
-        // setPoints(points+(score*10));
         setIsSubmitted(true);
     };
 
@@ -59,11 +68,15 @@ const StartAnswer = ({points,setPoints}) => {
 
     return (
         <Container className="mt-4">
-            {!isSubmitted ? (
+            {loading ? (
+                <h4>{defaultLoading}</h4>
+            ) : !isSubmitted ? (
                 questions.length > 0 && currentQuestionIndex < questions.length ? (
                     <div>
                         {/* Display Current Question */}
-                        <h4 className="p-2" style={{ whiteSpace: "pre-wrap" }}>Q{questions[currentQuestionIndex].id}. {questions[currentQuestionIndex].text}</h4>
+                        <h4 className="p-2" style={{ whiteSpace: "pre-wrap" }}>
+                            Q{currentQuestionIndex + 1}. {questions[currentQuestionIndex].text}
+                        </h4>
 
                         {/* Display Options */}
                         {questions[currentQuestionIndex].options.map((option, index) => (
@@ -79,16 +92,16 @@ const StartAnswer = ({points,setPoints}) => {
 
                         {/* Navigation Buttons */}
                         <div className="mt-3 d-flex justify-content-between">
-                            <Button 
-                                variant="secondary" 
+                            <Button
+                                variant="secondary"
                                 onClick={() => setCurrentQuestionIndex((prev) => Math.max(prev - 1, 0))}
                                 disabled={currentQuestionIndex === 0}
                             >
                                 Prev Question
                             </Button>
                             {currentQuestionIndex < questions.length - 1 ? (
-                                <Button 
-                                    variant="success" 
+                                <Button
+                                    variant="success"
                                     onClick={() => setCurrentQuestionIndex((prev) => Math.min(prev + 1, questions.length - 1))}
                                 >
                                     Next Question
@@ -101,7 +114,7 @@ const StartAnswer = ({points,setPoints}) => {
                         </div>
                     </div>
                 ) : (
-                    <h4>Loading Questions...</h4>
+                    <h4>No Questions Available</h4>
                 )
             ) : (
                 // Show Results After Submission
@@ -124,7 +137,7 @@ const StartAnswer = ({points,setPoints}) => {
 
                                 return (
                                     <tr key={index}>
-                                        <td>{q.id}</td>
+                                        <td>{index + 1}</td>
                                         <td>{q.text}</td>
                                         <td>{userAnswer}</td>
                                         <td>{q.answer}</td>

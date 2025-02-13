@@ -24,7 +24,7 @@ const Layout = ({userName, userEmail, userAccess}) => {
 
     const [points , setPoints] = useState(100);
     const [wins , setWins] = useState(
-        Math.floor(Math.random()*100)
+        Math.floor(Math.random()*100 + 20)
     )
     
     return(
