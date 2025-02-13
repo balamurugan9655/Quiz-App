@@ -11,11 +11,11 @@ import Layout from './Pages/Layout';
 import Header from './Pages/Header';
 import Contant from './Pages/Contant';
 
-
+// basename="/Quiz-App"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/Quiz-App">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<App/>}/>
         <Route path="/layout" element={<Layout/>}/>
