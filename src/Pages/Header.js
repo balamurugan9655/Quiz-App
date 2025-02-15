@@ -60,23 +60,22 @@ const Header = ({userName,points}) =>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Nav className="flex-column">
-                        <Nav.Link href="#" className="text-white mb-2"> 
-        
+                        <Nav.Link href="#" className="text-white mb-2" style={{cursor: 'not-allowed'}}> 
                             <FaUserLarge className="me-2 fs-5"/>
                             Profile
                         </Nav.Link>
-                        <Nav.Link href="#" className="text-white mb-2">
+                        <Nav.Link href="#" className="text-white mb-2" style={{cursor: 'not-allowed'}}>
                             <PiSpinnerBallFill className="me-2 fs-5"/>
                             Spin & Win
                         </Nav.Link>
-                        <Nav.Link href="#" className="text-white mb-2">
+                        <Nav.Link href="#" className="text-white mb-2" style={{cursor: 'not-allowed'}}>
                             <IoDiamond className="me-2 fs-5"/>
                             Points 
                         </Nav.Link>
-                        <Nav.Link href="#" className="text-white mb-2">
+                        <Nav.Link href="#" className="text-white mb-2" style={{cursor: 'not-allowed'}}>
                             <MdLeaderboard className="me-2 fs-5"/>
                             Leaderboard</Nav.Link>
-                        <Nav.Link href="#" className="text-white mb-2">
+                        <Nav.Link href="#" className="text-white mb-2" style={{cursor: 'not-allowed'}}>
                             <IoSettings className="me-2 fs-5"/>
                             Settings
                         </Nav.Link>
